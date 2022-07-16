@@ -26,12 +26,15 @@ namespace Exercise2_4.Vistas
         }
         private async void listadoVideos_ItemTapped(object sender, ItemTappedEventArgs e)
         {
+
             Video aa = (Video)e.Item;
             String[] nom = aa.path.Split('/');
             String nom1 = nom[nom.Length - 1];
             Reproductor rep = new Reproductor();
             rep.BindingContext = aa;
+
             rep.Title = "Reproduciendo: " + nom1;
+
             //await CrossMediaManager.Current.Play(aa.path);
             await Navigation.PushAsync(rep);
         }

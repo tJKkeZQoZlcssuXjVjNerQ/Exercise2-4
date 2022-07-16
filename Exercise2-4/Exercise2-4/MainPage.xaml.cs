@@ -25,13 +25,12 @@ namespace Exercise2_4
 
             if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
             {
-                await DisplayAlert("No hay Camara", "No hay camara Disponible.", "OK");
-                return;
+                await DisplayAlert("No hay Camara", "No hay camara Disponible.", "OK"); return;
             }
             var file = await CrossMedia.Current.TakeVideoAsync(new Plugin.Media.Abstractions.StoreVideoOptions
             {
-                Directory = "MysVideos",
-                Name = "Vid01.mp4"
+                Name = "Vid01.mp4",
+                Directory = "MysVideos"
             });
             if (file == null)
                 return;
@@ -44,8 +43,7 @@ namespace Exercise2_4
         {
             if (!String.IsNullOrEmpty(pathVideo))
             {
-                var vid = new Video { path = pathVideo };
-                var respuesta = await App.BaseDatos.guardaVideos(vid);
+                var respuesta = await App.BaseDatos.guardaVideos(new Video { path = pathVideo });
                 if (respuesta == 1)
                 {
                     await DisplayAlert("INFO", "SE GUARDO EL VIDEO EN SQLite!", "OK");
